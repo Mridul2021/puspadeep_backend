@@ -2,13 +2,20 @@ const OngoingProjects = require('../models/ongoingProjects');
 
 exports.createOngoingProjects = async (req, res) => {
   try {
-    const newProject = new OngoingProjects(req.body);
+    const { name, location, projectDescription, pic } = req.body;
+
+    if (!Array.isArray(pic)) {
+      return res.status(400).json({ error: "pic must be an array" });
+    }
+
+    const newProject = new OngoingProjects({ name, location, projectDescription, pic });
     const savedProject = await newProject.save();
     res.status(201).json(savedProject);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
 };
+
 
 exports.getAllOngoingProjects = async (req, res) => {
   try {
@@ -31,16 +38,24 @@ exports.getOngoingProjectsById = async (req, res) => {
 
 exports.updateOngoingProjectsById = async (req, res) => {
   try {
+    const { pic } = req.body;
+
+    if (pic && !Array.isArray(pic)) {
+      return res.status(400).json({ error: "pic must be an array" });
+    }
+
     const updatedProject = await OngoingProjects.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
       runValidators: true,
     });
-    if (!updatedProject) return res.status(404).json({ message: 'Project not found' });
+
+    if (!updatedProject) return res.status(404).json({ message: "Project not found" });
     res.status(200).json(updatedProject);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
 };
+
 
 exports.deleteOngoingProjectsById = async (req, res) => {
   try {
