@@ -17,18 +17,9 @@ const completedProjectsSchema = new mongoose.Schema(
       required: true,
       maxlength: 500,
     },
-    picBefore: {
+    pic: {
       type: [String],
       required: true,
-    },
-    picAfter: {
-      type: [String],
-      required: true,
-    },
-    review: {
-      type: String,
-      required: true,
-      maxlength: 1000,
     },
   },
   { timestamps: true }
