@@ -12,6 +12,7 @@ const completedProjectsRoutes = require('./routes/completedProjectsRoutes');
 const ourFamily = require('./routes/ourFamilyRoutes');
 const awards=require('./routes/awardsRoutes')
 const teamMember = require('./routes/teamMemberRoutes');
+const priceDataRoutes = require('./routes/priceDataRoutes');
 
 mongoose.connect(process.env.MONGO_URL)
   .then(() => console.log('MongoDB connected successfully'))
@@ -28,6 +29,8 @@ app.use('/api', completedProjectsRoutes);
 app.use('/api', ourFamily);
 app.use('/api', awards);
 app.use('/api', teamMember);
+app.use('/api', priceDataRoutes);
+
 
 app.listen(PORT, () => {
   console.log(`Server is Running on port: ${PORT}`);
