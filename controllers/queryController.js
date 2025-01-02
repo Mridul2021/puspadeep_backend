@@ -18,7 +18,7 @@ exports.sendQueryEmail = async (req, res) => {
     const mailOptions = {
       from: process.env.EMAIL_FROM,
       to: process.env.EMAIL_TO,
-      subject: "New Query Submitted",
+      subject: `New Query Submitted by ${query.name}`,
       text: `A new query was submitted with the following details:\n\n
 Name: ${query.name}
 Phone Number: ${query.phno}

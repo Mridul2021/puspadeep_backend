@@ -18,7 +18,7 @@ exports.sendQuotationEmail = async (req, res) => {
     const mailOptions = {
       from: process.env.EMAIL_FROM,
       to: process.env.EMAIL_TO,
-      subject: "New Quotation Request Submitted",
+      subject: `New Quotation Request Submitted by ${query.name}`,
       text: `A new quotation request has been submitted with the following details:\n\n
 Name: ${quotation.name}
 Mobile Number: ${quotation.mobileNumber}
